@@ -1,4 +1,4 @@
-package com.mvillasenor.bookfinder.ui.search
+package com.mvillasenor.bookfinder.ui.search.recycler
 
 import android.view.View
 import android.widget.ImageView
@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso
 
 
 @EpoxyModelClass(layout = R.layout.item_search_result)
-abstract class SearchResultModel : EpoxyModelWithHolder<Holder>() {
+abstract class SearchResultModel : EpoxyModelWithHolder<SearchResultModel.Holder>() {
 
     @EpoxyAttribute lateinit var title: String
     @EpoxyAttribute var cover: String? = null
@@ -31,16 +31,18 @@ abstract class SearchResultModel : EpoxyModelWithHolder<Holder>() {
         holder.author.text = author
     }
 
-}
+    class Holder : EpoxyHolder() {
+        lateinit var cover: ImageView
+        lateinit var title: TextView
+        lateinit var author: TextView
 
-class Holder : EpoxyHolder() {
-    lateinit var cover: ImageView
-    lateinit var title: TextView
-    lateinit var author: TextView
-
-    override fun bindView(itemView: View) {
-        cover = itemView.findViewById(R.id.cover)
-        title = itemView.findViewById(R.id.title)
-        author = itemView.findViewById(R.id.author)
+        override fun bindView(itemView: View) {
+            cover = itemView.findViewById(R.id.cover)
+            title = itemView.findViewById(R.id.title)
+            author = itemView.findViewById(R.id.author)
+        }
     }
+
 }
+
+

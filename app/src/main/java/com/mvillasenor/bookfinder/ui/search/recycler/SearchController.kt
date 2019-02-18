@@ -1,10 +1,14 @@
-package com.mvillasenor.bookfinder.ui.search
+package com.mvillasenor.bookfinder.ui.search.recycler
 
 import com.airbnb.epoxy.TypedEpoxyController
 import com.mvillasenor.bookfinder.domain.Book
 
 class SearchController : TypedEpoxyController<List<Book>>() {
     override fun buildModels(books: List<Book>?) {
+        if (books.isNullOrEmpty()) {
+            emptyResult { id("empty") }
+        }
+
         books?.forEach {
             searchResult {
                 id(it.key)
