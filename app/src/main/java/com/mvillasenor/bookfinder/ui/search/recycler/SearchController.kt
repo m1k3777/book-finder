@@ -14,7 +14,7 @@ class SearchController : TypedEpoxyController<List<Book>>() {
                 id(it.key)
                 title(it.title)
                 cover(it.coverUrl)
-                author(it.authorName.fold("") { a, b -> "$a $b," })
+                author(it.authorName.joinToString(", "))
             }
         }
     }
