@@ -7,6 +7,7 @@ import com.mvillasenor.bookfinder.ui.common.Resource
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 import timber.log.Timber
+import java.io.IOException
 
 class SearchViewModel(
     mainCoroutineDispatcher: CoroutineDispatcher,
@@ -26,6 +27,9 @@ class SearchViewModel(
                 val result = searchBook(query, 1).await()
                 searchResults.postValue(Resource.success(result))
             } catch (e: HttpException) {
+                Timber.e(e, "Error performing search")
+                searchResults.postValue(Resource.error("Error loading search results"))
+            } catch (e: IOException) {
                 Timber.e(e, "Error performing search")
                 searchResults.postValue(Resource.error("Error loading search results"))
             }

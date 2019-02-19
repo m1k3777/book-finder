@@ -18,7 +18,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.mvillasenor.bookfinder.BooksTestRunner"
     }
     buildTypes {
         release {
@@ -53,7 +53,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:3.13.1'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.12.0'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit:1.0.6'
     testImplementation 'org.koin:koin-test:1.0.2'
 
@@ -62,5 +62,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:1.1.0"
     androidTestImplementation "androidx.test.ext:junit-ktx:1.1.0"
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.1'
+    androidTestImplementation 'org.koin:koin-test:1.0.2'
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.12.0'
 
 }

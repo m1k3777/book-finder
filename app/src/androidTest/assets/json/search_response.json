@@ -1,0 +1,26 @@
+{
+  "start": 0,
+  "num_found": 2,
+  "numFound": 2,
+  "docs": [
+    {
+      "key": "a",
+      "title": "Book 1",
+      "author_name": [
+        "author 1",
+        "author 2"
+      ],
+      "cover_i": "cover1",
+      "first_publish_year": "2018"
+    },
+    {
+      "key": "b",
+      "title": "Book 2",
+      "author_name": [
+        "author 3"
+      ],
+      "cover_i": "cover2",
+      "first_publish_year": "2014"
+    }
+  ]
+}
