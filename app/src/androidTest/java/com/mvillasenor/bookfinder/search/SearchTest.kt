@@ -27,7 +27,7 @@ import org.koin.test.KoinTest
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class SearchInstrumentedTest : KoinTest {
+class SearchTest : KoinTest {
 
     @Rule
     @JvmField
