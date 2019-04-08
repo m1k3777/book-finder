@@ -1,4 +1,4 @@
-package com.mvillasenor.bookfinder
+package com.mvillasenor.bookfinder.utils
 
 import androidx.test.platform.app.InstrumentationRegistry
 import okhttp3.mockwebserver.MockResponse

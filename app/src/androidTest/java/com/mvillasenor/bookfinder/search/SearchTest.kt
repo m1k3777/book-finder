@@ -1,17 +1,10 @@
 package com.mvillasenor.bookfinder.search
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.Visibility
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.mvillasenor.bookfinder.R
-import com.mvillasenor.bookfinder.Utils
-import com.mvillasenor.bookfinder.extensions.click
+import com.mvillasenor.bookfinder.dsl.robot
 import com.mvillasenor.bookfinder.ui.search.MainActivity
-import com.mvillasenor.bookfinder.utils.CustomMatchers.Companion.withItemCount
-import junit.framework.Assert.assertEquals
-import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
@@ -48,44 +41,91 @@ class SearchTest : KoinTest {
 
     @Test
     fun emptyStateOnStartup() {
-        onView(withId(R.id.noResults)).check(matches(isDisplayed()))
-        searchPageObject.searchResults.check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        robot {
+            inSearchScreen {
+                inNoResultView {
+                    isDisplayed()
+                }
+                inSearchResultsView {
+                    matchesVisibility(Visibility.VISIBLE)
+                }
+            }
+        }
     }
 
     @Test
     fun loadingStateIsShownCorrectly() {
-        searchPageObject.performSearch("t")
-        searchPageObject.loadingView.check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        robot {
+            inSearchScreen {
+                inSearchField {
+                    typeText("t")
+                }
+                inLoadingView {
+                    matchesVisibility(Visibility.VISIBLE)
+                }
+            }
+        }
     }
 
     @Test
     fun errorStateIsShownCorrectly() {
-        server.enqueue(MockResponse().setResponseCode(500))
-        searchPageObject.performSearch("t")
-        searchPageObject.errorView.check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        robot {
+            inServer(server) {
+                enqueueError()
+            }
+            inSearchScreen {
+                inSearchField {
+                    typeText("t")
+                }
+                inErrorView {
+                    matchesVisibility(Visibility.VISIBLE)
+                }
+            }
+        }
     }
 
     @Test
     fun correctNumberOfItems() {
-        server.enqueue(Utils.createResponse("json/search_response.json"))
-        searchPageObject.performSearch("t")
-        searchPageObject.searchResults.check(matches(withItemCount(2)))
+        robot {
+            inServer(server) {
+                enqueueJson("json/search_response.json")
+            }
+            inSearchScreen {
+                inSearchField {
+                    typeText("t")
+                }
+                inSearchResultsView {
+                    matchesItemCount(2)
+                }
+            }
+        }
     }
 
     @Test
     fun retriesOnError() {
-        server.enqueue(MockResponse().setResponseCode(500))
-
-        searchPageObject.performSearch("t")
-        searchPageObject.errorView.check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
-
-        server.enqueue(Utils.createResponse("json/search_response.json"))
-
-        searchPageObject.retry.click()
-
-        searchPageObject.searchResults.check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
-        searchPageObject.searchResults.check(matches(withItemCount(2)))
-
-        assertEquals(2, server.requestCount)
+        robot {
+            inServer(server) {
+                enqueueError()
+                enqueueJson("json/search_response.json")
+            }
+            inSearchScreen {
+                inSearchField {
+                    typeText("t")
+                }
+                inErrorView {
+                    matchesVisibility(Visibility.VISIBLE)
+                }
+                inRetryButton {
+                    click()
+                }
+                inSearchResultsView {
+                    matchesVisibility(Visibility.VISIBLE)
+                    matchesItemCount(2)
+                }
+            }
+            inServer(server) {
+                matchesRequestCount(2)
+            }
+        }
     }
 }
