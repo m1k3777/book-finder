@@ -2,7 +2,7 @@ package com.mvillasenor.bookfinder.domain.usecases
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.mvillasenor.bookfinder.data.repositories.RetrofitOpenLibraryRepository
-import com.mvillasenor.bookfinder.utils.Utils.createResponse
+import com.mvillasenor.bookfinder.utils.Util.createResponse
 import junit.framework.TestCase.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking

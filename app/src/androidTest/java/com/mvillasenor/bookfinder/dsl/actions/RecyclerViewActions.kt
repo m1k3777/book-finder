@@ -7,7 +7,7 @@ import org.hamcrest.Matcher
 
 open class RecyclerViewActions(matcher: () -> Matcher<View>) : ViewActions(matcher) {
 
-    fun matchesItemCount(itemCount: Int): Actions {
+    fun checkItemCount(itemCount: Int): Actions {
         onView().check(ViewAssertions.matches(CustomMatchers.withItemCount(itemCount)))
         return EndAction
     }

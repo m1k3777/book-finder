@@ -3,7 +3,7 @@ package com.mvillasenor.bookfinder.utils
 import okhttp3.mockwebserver.MockResponse
 import java.io.File
 
-object Utils {
+object Util {
     fun loadJson(path: String): String {
         val uri = this.javaClass.classLoader.getResource(path)
         val file = File(uri.path)

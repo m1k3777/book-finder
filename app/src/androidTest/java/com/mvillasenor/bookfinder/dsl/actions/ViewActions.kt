@@ -12,7 +12,7 @@ open class ViewActions(matcher: () -> Matcher<View>) : ScreenActions(matcher) {
         return EndAction
     }
 
-    fun matchesVisibility(visibility: ViewMatchers.Visibility): Actions {
+    fun checkVisibility(visibility: ViewMatchers.Visibility): Actions {
         onView().check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(visibility)))
         return EndAction
     }

@@ -47,7 +47,7 @@ class SearchTest : KoinTest {
                     isDisplayed()
                 }
                 inSearchResultsView {
-                    matchesVisibility(Visibility.VISIBLE)
+                    checkVisibility(Visibility.VISIBLE)
                 }
             }
         }
@@ -61,7 +61,7 @@ class SearchTest : KoinTest {
                     typeText("t")
                 }
                 inLoadingView {
-                    matchesVisibility(Visibility.VISIBLE)
+                    checkVisibility(Visibility.VISIBLE)
                 }
             }
         }
@@ -78,7 +78,7 @@ class SearchTest : KoinTest {
                     typeText("t")
                 }
                 inErrorView {
-                    matchesVisibility(Visibility.VISIBLE)
+                    checkVisibility(Visibility.VISIBLE)
                 }
             }
         }
@@ -95,7 +95,7 @@ class SearchTest : KoinTest {
                     typeText("t")
                 }
                 inSearchResultsView {
-                    matchesItemCount(2)
+                    checkItemCount(2)
                 }
             }
         }
@@ -113,18 +113,18 @@ class SearchTest : KoinTest {
                     typeText("t")
                 }
                 inErrorView {
-                    matchesVisibility(Visibility.VISIBLE)
+                    checkVisibility(Visibility.VISIBLE)
                 }
                 inRetryButton {
                     click()
                 }
                 inSearchResultsView {
-                    matchesVisibility(Visibility.VISIBLE)
-                    matchesItemCount(2)
+                    checkVisibility(Visibility.VISIBLE)
+                    checkItemCount(2)
                 }
             }
             inServer(server) {
-                matchesRequestCount(2)
+                checkRequestCount(2)
             }
         }
     }

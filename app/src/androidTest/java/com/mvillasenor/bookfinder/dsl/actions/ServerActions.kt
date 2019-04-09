@@ -16,7 +16,7 @@ open class ServerActions(val server: MockWebServer) : Actions {
         return EndAction
     }
 
-    fun matchesRequestCount(requestCount: Int): Actions {
+    fun checkRequestCount(requestCount: Int): Actions {
         assertEquals(requestCount, server.requestCount)
         return EndAction
     }
