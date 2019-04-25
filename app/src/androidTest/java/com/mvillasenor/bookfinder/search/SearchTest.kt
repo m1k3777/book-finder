@@ -109,6 +109,7 @@ class SearchTest : KoinTest {
                 enqueueJson("json/search_response.json")
             }
             inSearchScreen {
+
                 inSearchField {
                     typeText("t")
                 }
